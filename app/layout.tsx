@@ -1,3 +1,5 @@
+import Footer from "@/components/Footer";
+import Hero from "@/components/Hero";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -15,8 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+      <html lang="en">
+          <body className={inter.className}>
+              <main className="max-w-7xl mx-auto bg-[#0F1117]">
+                  <Hero />
+                  {children}
+                  <Footer />
+              </main>
+          </body>
+      </html>
   );
 }
