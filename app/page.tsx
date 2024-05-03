@@ -1,6 +1,8 @@
 import { fetchAnime } from '@/actions/anime.action';
 import LoadMore from '@/components/LoadMore';
 async function Home() {
+    // TODO: need to implement sort and filter system and also description page and need to show related anime.
+
     const data = await fetchAnime(1);
     return (
         <main className="sm:p-16 py-16 px-8 flex flex-col gap-10">
