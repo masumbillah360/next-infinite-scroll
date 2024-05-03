@@ -3,7 +3,7 @@ import { fetchAnime } from '@/actions/anime.action';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-let page = 209888888;
+let page = 2;
 
 export type AnimeCard = JSX.Element;
 function LoadMore() {
