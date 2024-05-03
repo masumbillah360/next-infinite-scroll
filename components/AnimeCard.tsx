@@ -27,11 +27,11 @@ function AnimeCard({ anime, index }: Readonly<Prop>) {
             }}
             initial="hidden"
             animate="visible"
-            transition={{ duration: .5, ease: 'easeInOut' }}
+            transition={{ duration: .5, delay: index * 0.1, ease: 'easeInOut' }}
             className="max-w-sm rounded relative w-full">
             <div className="relative w-full h-[37vh]">
                 <Image
-                    src={`https://shikimori.one${anime.image.original}`}
+                    src={`https://shikimori.one${anime.image?.original}`}
                     alt={anime.name}
                     fill
                     className="rounded-xl"

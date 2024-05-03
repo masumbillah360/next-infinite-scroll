@@ -6,11 +6,15 @@ export const fetchAnime = async (page: number) => {
         `https://shikimori.one/api/animes?page=${page}&limit=50`
     );
     const data = await response.json();
-    return data.map((item: AnimeProp, index: number) => (
-        <AnimeCard
-            key={item.id + item.name + index}
-            anime={item}
-            index={index}
-        />
-    ));
+    if (data.length == 1) {
+        return ['YOU HAVE SEEN ALL THE ANIME'];
+    } else {
+        return data.map((item: AnimeProp, index: number) => (
+            <AnimeCard
+                key={item.id + item.name + index}
+                anime={item}
+                index={index}
+            />
+        ));
+    }
 };

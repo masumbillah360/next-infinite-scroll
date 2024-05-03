@@ -3,37 +3,32 @@ import { fetchAnime } from '@/actions/anime.action';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-let page = 100000;
-let isPageEnd = false;
+let page = 209888888;
+
 export type AnimeCard = JSX.Element;
 function LoadMore() {
     const { ref, inView } = useInView();
     const [data, setData] = useState<AnimeCard[]>([]);
+    const [endData, setEndData] = useState([]);
     useEffect(() => {
-        if (isPageEnd) {
-            return;
-        } else if (inView) {
-            isPageEnd = false;
+        if (inView) {
             fetchAnime(page).then((res) => {
-                if (res.length > 0) {
+                if (res.length !== 1) {
                     setData([...data, ...res]);
                     page++;
                 } else {
-                    isPageEnd = true;
-                    console.log('Page khatam!');
+                    setEndData(res);
                 }
             });
         }
-        console.log(data.length);
-    }, [inView, data, isPageEnd]);
+    }, [inView, data]);
     return (
         <>
             <section className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-10">
                 {data}
             </section>
-            {isPageEnd ? (
-                <h1 className="text-3xl p-4 font-bold">Page Ended</h1>
-            ) : (
+
+            {endData.length !== 1 ? (
                 <section className="flex justify-center items-center w-full">
                     <div ref={ref}>
                         <Image
@@ -45,6 +40,10 @@ function LoadMore() {
                         />
                     </div>
                 </section>
+            ) : (
+                <h1 className="font-bold text-center text-3xl text-green-800 border border-green-300 rounded-md py-3">
+                    {endData[0]}
+                </h1>
             )}
         </>
     );
